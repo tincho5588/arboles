@@ -7,7 +7,7 @@ public class Nodo {
 	public Nodo(int dato) {
 		this.dato = dato;
 	}
-	
+
 	public int getDato() {
 		return dato;
 	}

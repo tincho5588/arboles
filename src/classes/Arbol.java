@@ -98,39 +98,39 @@ public class Arbol {
 	public void find(int valor) {
 		find(new Nodo(valor), this.raiz, 0);
 	}
-	
+
 	private void getMax(Nodo raiz) {
-		if(raiz == null) {
+		if (raiz == null) {
 			System.out.println("El arbol esta vacio!");
 			return;
 		}
-		
+
 		if (raiz.getHijoDerecha() == null) {
 			System.out.println("Valor maximo: " + raiz.getDato());
 			return;
 		}
-		
+
 		getMax(raiz.getHijoDerecha());
 	}
-	
+
 	public void getMax() {
 		getMax(this.raiz);
 	}
-	
+
 	private void getMin(Nodo raiz) {
-		if(raiz == null) {
+		if (raiz == null) {
 			System.out.println("El arbol esta vacio!");
 			return;
 		}
-		
+
 		if (raiz.getHijoIzquierda() == null) {
 			System.out.println("Valor minimo: " + raiz.getDato());
 			return;
 		}
-		
+
 		getMin(raiz.getHijoIzquierda());
 	}
-	
+
 	public void getMin() {
 		getMin(this.raiz);
 	}
