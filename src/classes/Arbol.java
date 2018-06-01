@@ -73,30 +73,29 @@ public class Arbol {
 		postOrder(this.raiz);
 	}
 
-	private void find(Nodo nodo, Nodo raiz, int piso) {
+	private void find(int valor, Nodo raiz, int piso) {
 		// Llegue al final del arbol, o sea q el dato no esta
 		if (raiz == null) {
-			System.out.println("Dato " + nodo.getDato() + " no encontrado");
+			System.out.println("Dato " + valor + " no encontrado");
 			return;
 		}
 
 		// Encontre el dato! lo muestro y corto la ejecucion
-		if (nodo.getDato() == raiz.getDato()) {
-			System.out.println("Dato: " + nodo.getDato() + " encontrado en el nivel: " + piso);
+		if (valor == raiz.getDato()) {
+			System.out.println("Dato: " + valor + " encontrado en el nivel: " + piso);
 			return;
 		}
 
 		// En este nodo no esta, pasemos al siguiente!
-		if (nodo.getDato() > raiz.getDato()) {
-			find(nodo, raiz.getHijoDerecha(), ++piso);
+		if (valor > raiz.getDato()) {
+			find(valor, raiz.getHijoDerecha(), ++piso);
 		} else {
-			find(nodo, raiz.getHijoIzquierda(), ++piso);
+			find(valor, raiz.getHijoIzquierda(), ++piso);
 		}
-
 	}
 
 	public void find(int valor) {
-		find(new Nodo(valor), this.raiz, 0);
+		find(valor, this.raiz, 0);
 	}
 
 	private void getMax(Nodo raiz) {
