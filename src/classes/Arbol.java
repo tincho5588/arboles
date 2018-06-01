@@ -31,6 +31,67 @@ public class Arbol {
 		addNodo(new Nodo(dato), this.raiz);
 	}
 
+	private void deleteNodo(int valor, Nodo raiz, Nodo padre) {
+		// El arbol esta vacio
+		if (raiz == null && padre == null) {
+			System.out.println("Arbol vacio! Inserte un dato primero");
+			return;
+		}
+		
+		// Llegue al final del arbol
+		if (raiz.getHijoDerecha() == null && raiz.getHijoIzquierda() == null
+				&& raiz.getDato() != valor) {
+			return;
+		}
+
+		// Encontre el dato!
+		if (valor == raiz.getDato()) {
+			if (raiz.getHijoDerecha() == null && raiz.getHijoIzquierda() == null) {
+				// No tiene hijos
+				if (padre.getHijoDerecha().equals(raiz)) {
+					padre.setHijoDerecha(null);
+				} else {
+					padre.setHijoIzquierda(null);
+				}
+				return;
+			} else {
+				if (raiz.getHijoDerecha() != null && raiz.getHijoIzquierda() == null) {
+					// tiene un hijo a la derecha
+					if (padre.getHijoDerecha().equals(raiz)) {
+						padre.setHijoDerecha(raiz.getHijoDerecha());
+					} else {
+						padre.setHijoIzquierda(raiz.getHijoDerecha());
+					}
+					return;
+				} else if (raiz.getHijoIzquierda() != null && raiz.getHijoDerecha() == null) {
+					// tiene un hijo a la izquierda
+					if (padre.getHijoDerecha().equals(raiz)) {
+						padre.setHijoDerecha(raiz.getHijoIzquierda());
+					} else {
+						padre.setHijoIzquierda(raiz.getHijoIzquierda());
+					}
+					return;
+				} else {
+					// Tiene 2 hijos
+					Nodo reemplazo = getMin(raiz.getHijoDerecha());
+					raiz.setDato(reemplazo.getDato());
+					deleteNodo(reemplazo.getDato(), raiz.getHijoDerecha(), raiz);
+				}
+			}
+		}
+
+		// En este nodo no esta, pasemos al siguiente!
+		if (valor > raiz.getDato()) {
+			deleteNodo(valor, raiz.getHijoDerecha(), raiz);
+		} else {
+			deleteNodo(valor, raiz.getHijoIzquierda(), raiz);
+		}
+	}
+
+	public void deleteNodo(int valor) {
+		deleteNodo(valor, this.raiz, null);
+	}
+
 	private void inOrder(Nodo raiz) {
 		// LLegue al final del arbol, quiebro
 		if (raiz == null) {
@@ -116,21 +177,21 @@ public class Arbol {
 		getMax(this.raiz);
 	}
 
-	private void getMin(Nodo raiz) {
+	private Nodo getMin(Nodo raiz) {
 		if (raiz == null) {
 			System.out.println("El arbol esta vacio!");
-			return;
+			return null;
 		}
 
 		if (raiz.getHijoIzquierda() == null) {
 			System.out.println("Valor minimo: " + raiz.getDato());
-			return;
+			return raiz;
 		}
 
-		getMin(raiz.getHijoIzquierda());
+		return getMin(raiz.getHijoIzquierda());
 	}
 
-	public void getMin() {
-		getMin(this.raiz);
+	public Nodo getMin() {
+		return getMin(this.raiz);
 	}
 }

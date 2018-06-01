@@ -20,6 +20,7 @@ public class Main {
 			System.out.println("5 - Buscar un valor");
 			System.out.println("6 - Mostrar el valor minimo");
 			System.out.println("7 - Mostrar el valor maximo");
+			System.out.println("8 - Eliminar un nodo");
 			System.out.println("0 - Salir");
 			opt = scan.nextInt();
 			switch (opt) {
@@ -45,6 +46,10 @@ public class Main {
 				break;
 			case 7:
 				arbolito.getMax();
+				break;
+			case 8:
+				System.out.println("Ingrese un numero: ");
+				arbolito.deleteNodo(scan.nextInt());
 				break;
 			case 0:
 				System.out.println("Gracias por volar con nosotros!");
